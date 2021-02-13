@@ -1,3 +1,7 @@
+/*
+V 1.0 Changelog:
+Added some kind of IO
+*/
 #include <iostream>
 #include <fstream>
 #include <string.h>
