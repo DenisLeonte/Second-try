@@ -12,3 +12,6 @@ It still works for now
 
 V 1.2.1
 Fixed a bug that broke the lexer
+
+V 1.2.2
+Made that the lexer can now recognize numbers

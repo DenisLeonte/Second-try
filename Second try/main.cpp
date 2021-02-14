@@ -1,6 +1,6 @@
 /*
-V 1.2.1 Changelog
-Fixed a bug that broke the lexer
+V 1.2.2 Changelog
+Made that the lexer can now recognize numbers
 */
 #include <iostream>
 #include <fstream>
@@ -48,6 +48,7 @@ void lexer()
 {
 	vector <string> op;
 	string aux, arg1, arg2, arg3, c;
+	float arg2x, arg3x;
 	in >> aux;
 	arg1 = aux;
 	while(strcmp(aux.c_str(),"|") != 0)
@@ -59,12 +60,27 @@ void lexer()
 	if (op[0] == "=")
 	{
 		arg2 = op[1];
-		prec = var[arg2];
+		try
+		{
+			prec = stoi(arg2);
+		}
+		catch (...)
+		{
+			prec = var[arg2];
+		}
 		for (int i = 2; i < op.size()-2; i += 2)
 		{
-			c = op[i];
 			arg3 = op[i + 1];
-			s = operations(prec, var[arg3], c[0]);
+			c = op[i];
+			try
+			{
+				arg3x = stoi(arg3);
+				s = operations(prec, arg3x, c[0]);
+			}
+			catch(...)
+			{
+				s = operations(prec, var[arg3], c[0]);
+			}
 			prec = s;
 		}
 		var[arg1] = prec;

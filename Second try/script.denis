@@ -3,9 +3,5 @@ var b 200
 var c 50
 var d 105
 var s 0
-assign s = a + b - c - d |
+assign s = 200 * 2 |
 print s
-print a
-print b
-print c
-print d
