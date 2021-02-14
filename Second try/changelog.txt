@@ -9,3 +9,6 @@ V 1.2
 Added a primal version of the lexer.
 It can only do linear algebrics, didnt try to use multiplications or divisions.
 It still works for now
+
+V 1.2.1
+Fixed a bug that broke the lexer

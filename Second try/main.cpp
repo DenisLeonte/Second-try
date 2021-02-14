@@ -1,8 +1,6 @@
 /*
-V 1.2 Changelog
-Added a primal version of the lexer.
-It can only do linear algebrics, didnt try to use multiplications or divisions.
-It still works for now
+V 1.2.1 Changelog
+Fixed a bug that broke the lexer
 */
 #include <iostream>
 #include <fstream>
@@ -57,18 +55,19 @@ void lexer()
 		in >> aux;
 		op.push_back(aux);
 	}
-	float s;
+	float s,prec;
 	if (op[0] == "=")
 	{
 		arg2 = op[1];
+		prec = var[arg2];
 		for (int i = 2; i < op.size()-2; i += 2)
 		{
 			c = op[i];
 			arg3 = op[i + 1];
-			s = operations(var[arg2], var[arg3], c[0]);
-			var[arg2] = s;
+			s = operations(prec, var[arg3], c[0]);
+			prec = s;
 		}
-		var[arg1] = var[arg2];
+		var[arg1] = prec;
 	}
 }
 

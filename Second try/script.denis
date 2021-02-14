@@ -1,6 +1,11 @@
 var a 100
 var b 200
 var c 50
+var d 105
 var s 0
-assign s = a + b + c |
+assign s = a + b - c - d |
 print s
+print a
+print b
+print c
+print d
