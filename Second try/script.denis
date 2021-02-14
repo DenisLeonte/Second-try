@@ -1,1 +1,6 @@
-print 3.5 + 4
+var a 100
+var b 200
+var c 50
+var s 0
+assign s = a + b + c |
+print s

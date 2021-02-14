@@ -1,19 +1,22 @@
 /*
-V 1.1 Changelog
-Made the IO better and separated the operations and the input
-Still have to do the loop
+V 1.2 Changelog
+Added a primal version of the lexer.
+It can only do linear algebrics, didnt try to use multiplications or divisions.
+It still works for now
 */
 #include <iostream>
 #include <fstream>
 #include <string.h>
 #include <map>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 ifstream in("script.denis");
 map <string, float> var;
 string operators = ":=+-/*%";
-string functions[] = { "var","print" };
+string f[] = { "var","print","assign" };
 
 //The operations hub function
 float operations(float val1, float val2, char op)
@@ -42,24 +45,62 @@ float operations(float val1, float val2, char op)
 	}
 }
 
-//The main input function
-void IO()
+//The main function that will understand expressions
+void lexer()
 {
-	string op;
-	in >> op;
-	//print
-	if (strcmp(op.c_str(), functions[1].c_str()) == 0)
+	vector <string> op;
+	string aux, arg1, arg2, arg3, c;
+	in >> aux;
+	arg1 = aux;
+	while(strcmp(aux.c_str(),"|") != 0)
 	{
-		float a, b;
-		char x;
-		in >> a >> x >> b;
-		cout << operations(a, b, x) << endl;
+		in >> aux;
+		op.push_back(aux);
+	}
+	float s;
+	if (op[0] == "=")
+	{
+		arg2 = op[1];
+		for (int i = 2; i < op.size()-2; i += 2)
+		{
+			c = op[i];
+			arg3 = op[i + 1];
+			s = operations(var[arg2], var[arg3], c[0]);
+			var[arg2] = s;
+		}
+		var[arg1] = var[arg2];
+	}
+}
+
+//The main input function
+void IO(string op)
+{
+	//declaring a variable
+	if (strcmp(op.c_str(), f[0].c_str()) == 0)
+	{
+		string name;
+		float value;
+		in >> name >> value;
+		var[name] = value;
+	}
+	//print a variable
+	if (strcmp(op.c_str(), f[1].c_str()) == 0)
+	{
+		string ax;
+		in >> ax;
+		cout << var[ax] << endl;
+	}
+	//Gateway to the lexer
+	if (strcmp(op.c_str(), f[2].c_str()) == 0)
+	{
+		lexer();
 	}
 }
 
 int main()
 {
-	string op;
-	IO();
+	string io;
+	while (in>>io)
+		IO(io);
 	return 0;
 }

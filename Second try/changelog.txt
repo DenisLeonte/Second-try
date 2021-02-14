@@ -1,0 +1,11 @@
+V 1.0 
+Added some kind of IO
+
+V 1.1 
+Made the IO better and separated the operations and the input
+Still have to do the loop
+
+V 1.2
+Added a primal version of the lexer.
+It can only do linear algebrics, didnt try to use multiplications or divisions.
+It still works for now
