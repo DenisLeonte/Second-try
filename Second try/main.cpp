@@ -1,6 +1,6 @@
 /*
-V 1.2.2 Changelog
-Made that the lexer can now recognize numbers
+V 1.2.3 Changelog
+Added comments, changed variable declaration and added errors at variable declaration
 */
 #include <iostream>
 #include <fstream>
@@ -14,7 +14,7 @@ using namespace std;
 ifstream in("script.denis");
 map <string, float> var;
 string operators = ":=+-/*%";
-string f[] = { "var","print","assign" };
+string f[] = { "var","print","assign","**" };
 
 //The operations hub function
 float operations(float val1, float val2, char op)
@@ -93,10 +93,20 @@ void IO(string op)
 	//declaring a variable
 	if (strcmp(op.c_str(), f[0].c_str()) == 0)
 	{
-		string name;
-		float value;
-		in >> name >> value;
-		var[name] = value;
+		try
+		{
+			string name, aux;
+			float value;
+			in >> name >> aux >> value;
+			if (aux[0] == '=')
+				var[name] = value;
+			else
+				throw(1);
+		}
+		catch (int)
+		{
+			cout << "COMPILING ERROR AT VARIABLE DECLARATION\n";
+		}
 	}
 	//print a variable
 	if (strcmp(op.c_str(), f[1].c_str()) == 0)
@@ -109,6 +119,18 @@ void IO(string op)
 	if (strcmp(op.c_str(), f[2].c_str()) == 0)
 	{
 		lexer();
+	}
+	//Comments
+	if (strcmp(op.c_str(), f[3].c_str()) == 0)
+	{
+		string aux;
+		while (in >> aux)
+		{
+			if (strcmp(aux.c_str(), f[3].c_str()) == 0)
+			{
+				break;
+			}
+		}
 	}
 }
 

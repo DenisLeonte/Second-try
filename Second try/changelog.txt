@@ -15,3 +15,6 @@ Fixed a bug that broke the lexer
 
 V 1.2.2
 Made that the lexer can now recognize numbers
+
+V 1.2.3
+Added comments, changed variable declaration and added errors at variable declaration
