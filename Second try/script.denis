@@ -1,8 +1,8 @@
 **
-V 1.2.3
+V 1.2.5
 USAGE : 
 var <variable_name> = <value> Declare a variable, only int for now
-assign <destination_variable_name> = <arg1> <operation> <arg2> <operation> ... <operation> <argN> Mathematical expression
+assign <destination_variable_name> = <arg1> <operation> <arg2> <operation> ... <operation> <argN> Mathematical expression. You can now use parantheses
 print <variable_name> Basically shows the value of the variable
 **
 
@@ -11,5 +11,5 @@ var b = 200
 var c = 50
 var d = 105
 var s = 0
-assign s = 200 * 2 - d |
+assign s = ( 100 - 25 ) * 2 |
 print s
